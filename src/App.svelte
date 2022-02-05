@@ -5,6 +5,12 @@
 <main>
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<div class="outer">
+        <div class="box" />
+        <div class="box" />
+        <div class="box" />
+        <div class="box" />
+    </div>
 </main>
 
 <style lang="scss">
@@ -27,4 +33,16 @@
 			max-width: none;
 		}
 	}
+	
+	.outer {
+        display: flex;
+        transition: .2s ease-out;
+    }
+
+    .box {
+        width: 600px;
+        height: 200px;
+        background-color: orange;
+        margin: 20px;
+    }
 </style>

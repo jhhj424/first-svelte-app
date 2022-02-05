@@ -39,7 +39,14 @@ export default {
 	},
 	plugins: [
 		svelte({
-			preprocess: sveltePreprocess(),
+			preprocess: sveltePreprocess({
+                // postcss를 이용하여 공급업체 접두사 등록
+                postcss: {
+                    plugins: [
+                        require('autoprefixer')() // autoprefixer 등록
+                    ]
+                }
+            }),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
