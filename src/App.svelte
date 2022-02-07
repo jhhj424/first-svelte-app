@@ -1,5 +1,6 @@
 <script>
 	export let name;
+	import MyComponent from '~/MyComponent.svelte';
 </script>
 
 <main>
@@ -11,6 +12,7 @@
         <div class="box" />
         <div class="box" />
     </div>
+	<MyComponent />
 </main>
 
 <style lang="scss">
@@ -33,7 +35,7 @@
 			max-width: none;
 		}
 	}
-	
+
 	.outer {
         display: flex;
         transition: .2s ease-out;
