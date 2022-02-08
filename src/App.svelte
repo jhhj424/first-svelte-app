@@ -1,6 +1,8 @@
 <script>
 	export let name;
 	import MyComponent from '~/MyComponent.svelte';
+	console.log('console 1 ...');
+	console.log('console 2 ...');
 </script>
 
 <main>
@@ -13,6 +15,7 @@
         <div class="box" />
     </div>
 	<MyComponent />
+	<h2>console 방지 테스트 ...</h2>
 </main>
 
 <style lang="scss">

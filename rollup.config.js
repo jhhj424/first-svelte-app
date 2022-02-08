@@ -7,6 +7,7 @@ import css from 'rollup-plugin-css-only';
 import { sveltePreprocess } from 'svelte-preprocess/dist/autoProcess';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
+import strip from '@rollup/plugin-strip';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -40,6 +41,11 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		// production 일때만 strip 적용
+        production && strip({
+            include: '**/*.(svelte|js)', // svelte, js로 끝나는 확장자에 적용, 기본 값: '**/*.js'
+            functions: ['console.*'] // 적용 될 함수 설정, 기본 값: ['console.*', 'assert.*']
+        }),
 		alias({
             entries: [
                 {
