@@ -56,6 +56,10 @@ export default {
         }),
 		svelte({
 			preprocess: sveltePreprocess({
+				scss: {
+                    // 전역 scss 파일 등록, scss가 사용되는 곳에만 적용
+                    prependData: ['@import "./src/common.scss";'],
+                },
                 // postcss를 이용하여 공급업체 접두사 등록
                 postcss: {
                     plugins: [
