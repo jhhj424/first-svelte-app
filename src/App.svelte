@@ -1,21 +1,22 @@
 <script>
-	import { tick } from 'svelte';
-
-	let str = 'String!!';
-	let divEl;
-	let h3El;
-
-	const changeStyle = async () => {
-		await tick(); // 화면에 요소들이 모두 그려질 때까지 대기
-		divEl.style.border = '1px solid #000';
-		h3El.style.backgroundColor = 'orange';
-	}
-
-	changeStyle();
+	let str1 = '';
+	let str2 = '';
+	let str3 = '';
 </script>
 
 <main>
-	<div bind:this={divEl}>
-		<h3 bind:this={h3El}>{str}</h3>
+	<div>
+		<h3>{str1}</h3>
+		<input type="text" value={str1} /> <!-- 단방향 바인딩 -->
+	</div>
+
+	<div>
+		<h3>{str2}</h3>
+		<input type="text" value={str2} on:change={(e) => str2 = e.target.value} /> <!-- 양방향 바인딩 -->
+	</div>
+
+	<div>
+		<h3>{str3}</h3>
+		<input type="text" bind:value={str3} /> <!-- 양방향 바인딩 -->
 	</div>
 </main>
