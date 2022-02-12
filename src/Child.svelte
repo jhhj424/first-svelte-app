@@ -1,18 +1,22 @@
 <script>
-    export let name; // name으로 전달받은 props 저장
-    export let age; // age로 전달받은 props 저장
-    export let otherName; // otherName으로 전달받은 props 저장
+    import { createEventDispatcher } from 'svelte';
+
+    const dispatch = createEventDispatcher();
+
+    let name = '';
+    let age = '';
+
+    // 함수에서 사용되는 변수들(name, age)이 변경될 때마다 실행 (반응성)
+    $: (() => {
+        // childProps로 name과 age를 전달
+        dispatch('childProps', {
+            name, // 이름이 동일해서 name: name,을 name,으로 변경
+            age // 이름이 동일해서 age: age를 age로 변경
+        })
+    })();
 </script>
 
-<div class="box">
-    <h2>name: {name}</h2>
-    <h2>age: {age}</h2>
-    <h2>otherName: {otherName}</h2>
+<div>
+    <input type="text" bind:value={name} /> <!-- 양방향 바인딩 -->
+    <input type="number" bind:value={age} /> <!-- 양방향 바인딩 -->
 </div>
-
-<style>
-    .box {
-        border-bottom: 1px solid black;
-        margin-bottom: 100px;
-    }
-</style>

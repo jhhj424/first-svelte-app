@@ -1,14 +1,28 @@
 <script>
 	import Child from './Child.svelte';
-	
+
 	let name = '';
 	let age = '';
+
+	const childProps = (e) => {
+		// 전달받은 데이터는 e.detail에 저장되어 있음
+		name = e.detail.name;
+		age = e.detail.age;
+	}
 </script>
 
 <main>
-	<input type="text" bind:value={name} /> <!-- 양방향 바인딩 -->
-	<input type="number" bind:value={age} /> <!-- 양방향 바인딩 -->
+	<Child on:childProps={childProps} /> <!-- on:자식의 dispatch 이름={처리할 부모의 메서드 이름}  -->
 
-	<Child name={name} age={age} otherName={name} /> <!-- child의 변수 명 = 부모의 변수 명 -->
-	<Child {name} {age} otherName={name}/> <!-- 변수 명이 동일한 경우 생략 가능 -->
+	<div class="box">
+		<h2>name: {name}</h2>
+		<h2>age: {age}</h2>
+	</div>
 </main>
+
+<style>
+    .box {
+        border-bottom: 1px solid black;
+        margin-bottom: 100px;
+    }
+</style>
