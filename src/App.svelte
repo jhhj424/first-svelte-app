@@ -1,45 +1,39 @@
 <script>
-	let name = '';
-	let age = '';
-
-	$: pow = age * age; // age값이 변할때마다 pow값을 age*age로 저장
-
-	const console3 = () => {
-		console.log(`3 → name: ${name}, age: ${age}, pow: ${pow}`);
-	}
-
-	$: age, (() => {
-		console.log(`0 → age`); // age가 변경될 때 마다 출력
-	})()
-
-	$: [age, name], (() => {
-		console.log(`1 → age, name`); // age, name이 변경될 때 마다 출력
-	})()
-
-	$: name, (() => {
-		console.log(`2 → name: ${name}, age: ${age}, pow: ${pow}`); // name, age가 변경될 때 마다 출력
-	})()
-
-	$: {
-		console3(); // 렌더링 될 때만 출력
-	}
-
-	$: (() => {
-		console.log(`4 → name: ${name}, age: ${age}, pow: ${pow}`); // name, age가 변경될 때 마다 출력
-	})()
-
-	$: if(age >= 1) {
-		console.log(`5 → name: ${name}, age: ${age}, pow: ${pow}`); // age가 1이상이고 name, age가 변경될 때 마다 출력
-	}
+	let array = ['first', 'second', 'third']
+	let toggle1 = false;
+	let toggle2 = false;
 </script>
 
 <main>
-	<input type="text" bind:value={name} placeholder="name" />
-	<input type="number" bind:value={age} placeholder="age" />
+	<div class='box'>
+		<button on:click={() => toggle1 = !toggle1}>Toggle1</button>
+		<button on:click={() => toggle2 = !toggle2}>Toggle2</button>
+	</div>
+
+	<!-- 조건문 -->
+	<div class='box'>
+		{#if toggle1 === true}
+			<h2>toggle1 is true</h2>
+		{:else if toggle2}
+			<h2>toggle1 is false and toggle2 is true</h2>
+		{:else}
+			<h2>toggle1 is false and toggle2 is false</h2>
+		{/if}
+	</div>
+
+	<!-- 반복문 -->
+	<div class='box'>
+		<h3>Array...</h3>
+		{#each array as data, index} <!-- #each {배열} as {요소}, {인덱스} -->
+			 <p>{index}: {data}</p>
+		{:else}
+			 <h4>Array is empty...</h4>
+		{/each}
+	</div>
 </main>
 
 <style>
-	input {
-		border: 1px solid orange;
+	.box {
+		border-bottom: 2px solid orange;
 	}
 </style>
