@@ -1,39 +1,39 @@
 <script>
-	let array = ['first', 'second', 'third']
-	let toggle1 = false;
-	let toggle2 = false;
+	let toggle = false;
+	$: box = toggle; // box값을 toggle값과 반응성을 띄며 동일하게 하기
 </script>
 
 <main>
-	<div class='box'>
-		<button on:click={() => toggle1 = !toggle1}>Toggle1</button>
-		<button on:click={() => toggle2 = !toggle2}>Toggle2</button>
+	<!-- style box가 항상 적용 -->
+	<div class="box">
+		<h2>current toggle is {toggle}</h2>
+		<button on:click={() => toggle = !toggle}>Toggle</button>
 	</div>
 
-	<!-- 조건문 -->
-	<div class='box'>
-		{#if toggle1 === true}
-			<h2>toggle1 is true</h2>
-		{:else if toggle2}
-			<h2>toggle1 is false and toggle2 is true</h2>
-		{:else}
-			<h2>toggle1 is false and toggle2 is false</h2>
-		{/if}
+	<!-- toggle이 true일때만 style box 적용 -->
+	<div class={toggle ? 'box' : ''}>
+		<h2>3항 연산자 (toggle)</h2>
 	</div>
 
-	<!-- 반복문 -->
-	<div class='box'>
-		<h3>Array...</h3>
-		{#each array as data, index} <!-- #each {배열} as {요소}, {인덱스} -->
-			 <p>{index}: {data}</p>
-		{:else}
-			 <h4>Array is empty...</h4>
-		{/each}
+	<!-- toggle이 true일때만 style box 적용 -->
+	<div class:box={toggle}>
+		<h2>Class 지시어 바인딩 (toggle)</h2>
+	</div>
+
+	<!-- box가 true일때만 style box 적용 -->
+	<div class:box={box}>
+		<h2>Class 지시어 바인딩 (box)</h2>
+	</div>
+
+	<!-- box가 true일때만 style box 적용 -->
+	<div class:box>
+		<h2>Class 지시어 바인딩 생략 (box)</h2>
 	</div>
 </main>
 
 <style>
 	.box {
-		border-bottom: 2px solid orange;
+		border-bottom: 6px solid orange;
+		margin-bottom: 10px;
 	}
 </style>
